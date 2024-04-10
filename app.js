@@ -4,8 +4,9 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-// const catalogRoute = require('./server/routes/catalog')
+
 const carRoute = require('./routes/car');
+const authRoute = require('./routes/auth');
 
 dotenv.config();
 
@@ -23,9 +24,8 @@ app.use(express.json());
 
 
 //Backend routes
-// app.use('/api/catalog', catalogRoute);
 app.use('/api/catalog', carRoute);
-
+app.use('/api/auth', authRoute);
 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);

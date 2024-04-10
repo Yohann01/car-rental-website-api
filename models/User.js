@@ -1,16 +1,28 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { isEmail } = require('validator');
 
 const userSchema = new mongoose.Schema(
     {
-        username: { type: String, required:true, unique:true },
-        email: { type: String, required:true, unique:true },
-        password: { type: String, required:true },
+        username: { type: String, required: true, unique: true },
+        email: { 
+            type: String, 
+            required: [true, 'Please enter an Email'], 
+            unique: true,
+            // Custom validator using isEmail function from validator package
+            validate: {
+                validator: isEmail,
+                message: 'Please enter a valid email',
+            },
+        },
+        password: { type: String, required: [true, 'Please enter a Password'] },
         isAdmin: { 
-            type:Boolean, 
-            default:false 
+            type: Boolean, 
+            default: false,
         },
     },
-    { timestamps:true }
+    { timestamps: true }
 );
+
+
 
 module.exports = mongoose.model("User", userSchema);
