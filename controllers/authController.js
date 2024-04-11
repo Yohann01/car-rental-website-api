@@ -24,7 +24,7 @@ const handleErrors = (err) => {
 /*
 *POST /api/user/register
 */
-exports.registerUser = async (req, res) => {
+exports.signup = async (req, res) => {
     const newUser = new User ({
         username: req.body.username,
         email: req.body.email,
